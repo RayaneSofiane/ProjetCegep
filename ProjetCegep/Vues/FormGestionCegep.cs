@@ -2,8 +2,9 @@
 using System.Windows.Forms;
 using System.IO;
 using System.Xml.Serialization;
+using ProjetCegep.Modeles;
 
-namespace ProjetCegep
+namespace ProjetCegep.Vues
 {
    public partial class FormGestionCegep : Form
    {

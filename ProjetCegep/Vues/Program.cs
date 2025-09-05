@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ProjetCegep
+
+namespace ProjetCegep.Vues
 {
    static class Program
    {

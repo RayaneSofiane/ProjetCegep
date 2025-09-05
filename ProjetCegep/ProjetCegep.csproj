@@ -48,21 +48,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cegep.cs" />
-    <Compile Include="Cours.cs" />
-    <Compile Include="Departement.cs" />
-    <Compile Include="Enseignant.cs" />
-    <Compile Include="Etudiant.cs" />
-    <Compile Include="FormGestionCegep.cs">
+    <Compile Include="Modeles\Cegep.cs" />
+    <Compile Include="Controler\CegepControler.cs" />
+    <Compile Include="Modeles\Cours.cs" />
+    <Compile Include="Modeles\Departement.cs" />
+    <Compile Include="Modeles\Enseignant.cs" />
+    <Compile Include="Modeles\Etudiant.cs" />
+    <Compile Include="Vues\FormGestionCegep.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormGestionCegep.Designer.cs">
+    <Compile Include="Vues\FormGestionCegep.Designer.cs">
       <DependentUpon>FormGestionCegep.cs</DependentUpon>
     </Compile>
-    <Compile Include="Personne.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Modeles\Personne.cs" />
+    <Compile Include="Vues\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormGestionCegep.resx">
+    <EmbeddedResource Include="Vues\FormGestionCegep.resx">
       <DependentUpon>FormGestionCegep.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
