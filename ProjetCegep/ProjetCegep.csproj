@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\CegepDto.cs" />
+    <Compile Include="Dto\DepartementDto.cs" />
     <Compile Include="Modeles\Cegep.cs" />
     <Compile Include="Controler\CegepControler.cs" />
     <Compile Include="Modeles\Cours.cs" />

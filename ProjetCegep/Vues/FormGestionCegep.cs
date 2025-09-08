@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using ProjetCegep.Controler;
 using ProjetCegep.Dto;
-//using ProjetCegep.Modeles;
+using ProjetCegep.Modeles;
 
 namespace ProjetCegep.Vues
 {
@@ -38,16 +38,16 @@ namespace ProjetCegep.Vues
         /// </summary>
         public void RemplirListes()
         {
-             //lbxDepartement.Items.Clear();
-             //lbxDepartementInfoCegep.Items.Clear();
-             //cbxDepartementEnseignant.Items.Clear();
-             //if (monCegep != null)
-             //    foreach (Departement departement in monCegep.ObtenirListeDepartement())
-             //    {
-             //       lbxDepartement.Items.Add(departement.ToString());
-             //       lbxDepartementInfoCegep.Items.Add(departement.ToString());
-             //       cbxDepartementEnseignant.Items.Add(departement.ToString());
-             //    }
+            lbxDepartement.Items.Clear();
+            lbxDepartementInfoCegep.Items.Clear();
+            cbxDepartementEnseignant.Items.Clear();
+            if (CegepControler.Instance != null)
+                foreach (DepartementDto departement in CegepControler.Instance.ObtenirListeDepartement())
+                {
+                    lbxDepartement.Items.Add(departement.Nom.ToString());
+                    lbxDepartementInfoCegep.Items.Add(departement.Nom.ToString());
+                    cbxDepartementEnseignant.Items.Add(departement.Nom.ToString());
+                }
         }
 
         //Onglet Gestion enseignants...
@@ -176,20 +176,35 @@ namespace ProjetCegep.Vues
         /// <param name="e"></param>
         private void BtnAjouterDepartement_Click(object sender, EventArgs e)
         {
-            //Departement unDepartement;
-
-            //unDepartement = new Departement(edtNoDepartement.Text, edtNomDepartement.Text, edtDescriptionDepartement.Text);
-
-            //if (monCegep.AjouterDepartement(unDepartement))
+            CegepControler.Instance.AjouterDepartement(new DepartementDto(edtNoDepartement.Text, edtNomDepartement.Text, edtDescriptionDepartement.Text));
+            RemplirListes();
+            Refresh();
+            //public bool ajouterdepartement(departementdto undepartement)
             //{
-            //    RemplirListes();
-            //    MessageBox.Show(unDepartement.ToString() + "\na bien été crée.");
+
+
+            //    undepartement = new departement(undepartement.no, , undepartement.description);
+
+            //if (CegepControler.Instance.AjouterDepartement(new DepartementDto(edtNoDepartement.Text, edtNomDepartement.Text, edtDescriptionDepartement.Text)))
+            //{
+            //    messagebox.show(undepartement.tostring() + "\na bien été crée.");
+            //    remplirlistes();
             //}
             //else
             //{
-            //    MessageBox.Show("Le département existe déjà et n'a pas été crée.");
+            //    messagebox.show("le département existe déjà et n'a pas été crée.");
             //}
-            //Refresh();
+            //    if (moncegep != null)
+            //    {
+            //        departement departement = new departement(undepartement.no, undepartement.nom, undepartement.description);
+            //        if (!moncegep.sidepartementpresent(departement))
+            //        {
+            //            moncegep.listedepartement.add(departement);
+            //            return true;
+            //        }
+            //    }
+            //    return false;
+            //}
         }
 
         /// <summary>
@@ -224,6 +239,7 @@ namespace ProjetCegep.Vues
         /// <param name="e"></param>
         private void BtnAjouterCegep_Click(object sender, EventArgs e)
         {
+            //TODO: Vérifier si un cégep existe déjà avant d'en créer un nouveau.
             CegepControler.Instance.CreerCegep(new CegepDto(edtNomCegep.Text,edtAdresseCegep.Text, edtVilleCegep.Text, edtProvinceCegep.Text, edtCodePostalCegep.Text, edtTelephoneCegep.Text, edtCourrielCegep.Text));
             MessageBox.Show(edtNomCegep + "\n a bien été crée.");
         }

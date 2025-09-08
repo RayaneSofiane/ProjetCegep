@@ -69,6 +69,46 @@ namespace ProjetCegep.Controler
             return false;
         }
 
+        public List<DepartementDto> ObtenirListeDepartement()
+        {
+            List<DepartementDto> listeDepartementDto = new List<DepartementDto>();
+            if (monCegep != null)
+            {
+                foreach (Departement departement in monCegep.ObtenirListeDepartement())
+                {
+                    listeDepartementDto.Add(new DepartementDto(departement));
+                }
+            }
+            return listeDepartementDto;
+        }
+
+        public DepartementDto ObtenirDepartement(DepartementDto unDepartement) 
+        {
+            if (monCegep != null)
+            {
+                Departement departement = monCegep.ObtenirDepartement(new Departement(unDepartement.No, unDepartement.Nom, unDepartement.Description));
+                if (departement != null)
+                {
+                    return new DepartementDto(departement);
+                }
+            }
+            return null;
+        }
+
+        public bool AjouterDepartement(DepartementDto unDepartement)
+        {
+            if (monCegep != null)
+            {
+                if (!monCegep.SiDepartementPresent(new Departement(unDepartement.No, unDepartement.Nom, unDepartement.Description)))
+                {
+                    monCegep.listeDepartement.Add(new Departement(unDepartement.No, unDepartement.Nom, unDepartement.Description));
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
