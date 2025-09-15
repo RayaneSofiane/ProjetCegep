@@ -29,5 +29,11 @@ namespace ProjetCegep.Dto
             Description = uneDescription;
             
         }
+
+        internal IEnumerable<Enseignant> ObtenirListeEnseignant()
+        {
+            Departement departement = new Departement(No, Nom, Description);
+            return departement.ObtenirListeEnseignant();
+        }
     }
 }

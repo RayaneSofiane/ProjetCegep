@@ -68,7 +68,10 @@ namespace ProjetCegep.Controler
             }
             return false;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<DepartementDto> ObtenirListeDepartement()
         {
             List<DepartementDto> listeDepartementDto = new List<DepartementDto>();
@@ -81,7 +84,11 @@ namespace ProjetCegep.Controler
             }
             return listeDepartementDto;
         }
-
+        /// <summary>
+        /// obtient le département voulue
+        /// </summary>
+        /// <param name="unDepartement"></param>
+        /// <returns></returns>
         public DepartementDto ObtenirDepartement(DepartementDto unDepartement) 
         {
             if (monCegep != null)
@@ -94,7 +101,11 @@ namespace ProjetCegep.Controler
             }
             return null;
         }
-
+        /// <summary>
+        /// ajoute un département au cégep
+        /// </summary>
+        /// <param name="unDepartement"></param>
+        /// <returns></returns>
         public bool AjouterDepartement(DepartementDto unDepartement)
         {
             if (monCegep != null)
@@ -106,6 +117,67 @@ namespace ProjetCegep.Controler
                 }
             }
             return false;
+        }
+        /// <summary>
+        /// supprime le département du cégep
+        /// </summary>
+        /// <param name="unDepartement"></param>
+        /// <returns></returns>
+        public bool SupprimerDepartement(DepartementDto unDepartement)
+        {
+            if (monCegep != null)
+            {
+                return monCegep.listeDepartement.Remove(new Departement(unDepartement.No, unDepartement.Nom, unDepartement.Description));
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// ajoute un enseignant à un département
+        /// </summary>
+        /// <param name="unDepartement"></param>
+        /// <param name="unEnseignant"></param>
+        /// <returns></returns>
+        public bool AjouterEnseignant(DepartementDto unDepartement, EnseignantDto unEnseignant)
+        {
+            var dep = monCegep.ObtenirDepartement(new Departement(unDepartement.No,unDepartement.Nom,unDepartement.Description));
+            return dep?.AjouterEnseignant(new Enseignant(unEnseignant.NoEmploye, unEnseignant.Prenom, unEnseignant.Nom, unEnseignant.Adresse, unEnseignant.Ville, unEnseignant.Province, unEnseignant.CodePostal, unEnseignant.Telephone, unEnseignant.Courriel)) ?? false;
+
+        }
+        /// <summary>
+        /// Modifie un enseignant
+        /// </summary>
+        /// <param name="departement"></param>
+        /// <param name="enseignant"></param>
+        /// <returns></returns>
+        public bool ModifierEnseignant(DepartementDto departement, EnseignantDto enseignant)
+        {
+            var dep = monCegep.ObtenirDepartement(new Departement(departement.No, departement.Nom, departement.Description));
+            var ens = dep?.ObtenirEnseignant(new Enseignant(enseignant.NoEmploye, enseignant.Prenom, enseignant.Nom, enseignant.Adresse, enseignant.Ville, enseignant.Province, enseignant.CodePostal, enseignant.Telephone, enseignant.Courriel));
+            if (ens != null)
+            {
+                ens.Prenom = enseignant.Prenom;
+                ens.Nom = enseignant.Nom;
+                ens.Adresse = enseignant.Adresse;
+                ens.Ville = enseignant.Ville;
+                ens.Province = enseignant.Province;
+                ens.CodePostal = enseignant.CodePostal;
+                ens.Telephone = enseignant.Telephone;
+                ens.Courriel = enseignant.Courriel;
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// Supprime l'enseignant
+        /// </summary>
+        /// <param name="departement"></param>
+        /// <param name="enseignant"></param>
+        /// <returns></returns>
+        public bool SupprimerEnseignant(DepartementDto departement, EnseignantDto enseignant)
+        {
+            var dep = monCegep.ObtenirDepartement(new Departement(departement.No, departement.Nom, departement.Description));
+            return dep?.EnleverEnseignant(new Enseignant(enseignant.NoEmploye, enseignant.Prenom, enseignant.Nom, enseignant.Adresse, enseignant.Ville, enseignant.Province, enseignant.CodePostal, enseignant.Telephone, enseignant.Courriel)) ?? false;
         }
 
 
